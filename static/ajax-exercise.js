@@ -6,12 +6,14 @@
 function showFortune(evt) {
 
     // TODO: get the fortune and show it in the #fortune-text div
-    $.get('/fortune', (results) => {
+    // $.get('/fortune', (results) => {
 
-      const fortune = results;
-      $('#fortune-text').html(fortune);
-      console.log('Got result from server')
-    });
+    //   const fortune = results;
+    //   $('#fortune-text').html(fortune);
+    //   console.log('Got result from server')
+    // });
+
+    $("#fortune-text").load('/fortune');
 
 }
 
@@ -27,11 +29,12 @@ function showWeather(evt) {
     evt.preventDefault();
 
     let url = "/weather.json";
-    let formData = {"zipcode": $("#zipcode-field").val()};
+    // let formData = {"zipcode": $("#zipcode-field").val()};
 
 
     // TODO: request weather with that URL and show the forecast in #weather-info
-    $.get(url, formData, (results) => {
+    //serialize only works for get methods because they take a query string
+    $.get(url, $("#weather-form").serialize(), (results) => {
       const weather = results.forecast;
       $("#weather-info").html(weather);
     });
